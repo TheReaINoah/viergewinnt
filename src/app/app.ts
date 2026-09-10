@@ -8,6 +8,18 @@ enum CellType {
 }
 export { CellType };
 
+function createGrid({ rows, columns }: { rows: number; columns: number }) {
+  const grid = [];
+  for (let i = 0; i < rows; i++) {
+    const row = [];
+    for (let j = 0; j < columns; j++) {
+      row.push(CellType.Empty);
+    }
+    grid.push(row);
+  }
+  return grid;
+}
+
 @Component({
   imports: [RouterOutlet],
   selector: 'app-root',
