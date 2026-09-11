@@ -1,27 +1,13 @@
-<header class="app-header">
-  <h1 class="app-title">Vier Gewinnt</h1>
-  <img src="/pepe.jpg" alt="Pepe" class="pepe-logo" />
-</header>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/" />
+    <title>4Gewinnt</title>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>
 
-<main class="app-content">
-  <div class="game-area">
-    <div
-      class="player-box player-1"
-      [class.active]="activePlayer() === 1">
-      Spieler 1
-    </div>
-    <div class="board" (click)="togglePlayer()">
-      @for (row of grid(); track $index) {
-        <div class="board-row">
-          @for (cell of row; track $index) {
-            <div class="board-cell"></div>
-          }
-        </div>
-      }
-    </div>
-    <div class="player-box player-2"
-         [class.active]="activePlayer() === 2">
-      Spieler 2
-    </div>
-  </div>
-</main>

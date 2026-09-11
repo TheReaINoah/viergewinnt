@@ -51,20 +51,35 @@
   border-right: 1px solid #000;
   border-bottom: 1px solid #000;
   box-sizing: border-box;
+  background: #fff;
 }
-.player-box{
+
+.board-cell.empty {
+  background: #fff;
+}
+
+.board-cell.yellow {
+  background: #ffd400;
+}
+
+.board-cell.red {
+  background: #ff3b30;
+}
+
+.player-box {
   width: 250px;
   height: 50px;
   box-sizing: border-box;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   padding: 1rem;
 }
+
 .player-1 {
-  background-color: red;
+  background-color: #ffd400;
 }
 
 .player-2 {
-  background-color: yellow;
+  background-color: #ff3b30;
 }
 
 .player-box.active {
