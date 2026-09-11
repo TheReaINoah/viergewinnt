@@ -1,9 +1,19 @@
 <header class="app-header">
   <h1 class="app-title">Vier Gewinnt</h1>
-  <img ngSrc="../../pepe.jpg" alt="pepe" class="pepe-logo" height="456" width="640" />
+  <img ngSrc="/pepe.png" alt="pepe" class="pepe-logo" height="300" width="300" />
 </header>
 
 <main class="app-content">
+
+<div class="scoreboard">
+ <div class="score player-1-score">
+   Spieler 1: {{ playerOneScore() }}
+ </div>
+ <div class="score player-2-score">
+   Spieler 2: {{ playerTwoScore() }}
+ </div>
+</div>
+
   <div class="game-area">
     <div class="player-box player-1" [class.active]="currentPlayer() === playerOne">
       Spieler 1
@@ -29,6 +39,13 @@
       Spieler 2
     </div>
   </div>
+
+  <footer class="app-footer">
+    <small>© Erstellt und 100% alleine von Noah (und marc)
+      <p>© Emotional Support by Moritzx
+
+    </p></small>
+  </footer>
 </main>
 
 <router-outlet />
