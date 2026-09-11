@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
 
 export enum CellType {
   Empty = 'empty',
@@ -15,7 +16,7 @@ export enum Player {
 type CheckResult = Player | 'draw' | 'notDecided';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NgOptimizedImage],
   selector: 'app-root',
   styleUrl: '../styles.css',
   templateUrl: './app.html',
@@ -60,7 +61,8 @@ export class App {
       return nextGrid;
     });
 
-    this.checkWin(this.grid());
+    this.checkWinHorizontal(this.grid());
+    this.checkWinVertical(this.grid());
 
     this.currentPlayer.update((player) => (player === Player.ONE ? Player.TWO : Player.ONE));
   }
@@ -74,7 +76,7 @@ export class App {
     return null;
   }
 
-  private checkWin(grid: CellType[][]): CheckResult {
+  private checkWinHorizontal(grid: CellType[][]): CheckResult {
     for (let row = 0; row < grid.length; row++) {
       let countstreak = 0;
       let lastCell: CellType | null = null;
@@ -101,7 +103,35 @@ export class App {
         }
       }
     }
+    return 'notDecided';
+  }
+  private checkWinVertical(grid: CellType[][]): CheckResult {
+    for (let column = 0; column < grid[0].length; column++) {
+      let countstreak = 0;
+      let lastCell: CellType | null = null;
 
+      for (let row = 0; row < grid.length; row++) {
+        const cell = grid[row][column];
+
+        if (cell === CellType.Empty) {
+          countstreak = 0;
+          lastCell = null;
+          continue;
+        }
+        if (cell === lastCell) {
+          countstreak++;
+        } else {
+          countstreak = 1;
+          lastCell = cell;
+        }
+
+        if (countstreak >= 4) {
+          const winner = cell === CellType.Yellow ? Player.ONE : Player.TWO;
+          alert(`Player ${winner === Player.ONE ? 'ONE' : 'TWO'} wins!`);
+          return winner;
+        }
+      }
+    }
     return 'notDecided';
   }
 
