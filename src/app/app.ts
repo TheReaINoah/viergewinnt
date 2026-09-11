@@ -60,6 +60,8 @@ export class App {
       return nextGrid;
     });
 
+    this.checkWin(this.grid());
+
     this.currentPlayer.update((player) => (player === Player.ONE ? Player.TWO : Player.ONE));
   }
 
@@ -74,26 +76,26 @@ export class App {
 
   private checkWin(grid: CellType[][]): CheckResult {
     for (let row = 0; row < grid.length; row++) {
-      let streak = 0;
+      let countstreak = 0;
       let lastCell: CellType | null = null;
 
       for (let column = 0; column < grid[row].length; column++) {
         const cell = grid[row][column];
 
         if (cell === CellType.Empty) {
-          streak = 0;
+          countstreak = 0;
           lastCell = null;
           continue;
         }
         if (cell === lastCell) {
-          streak++;
+          countstreak++;
         } else {
-          streak = 1;
+          countstreak = 1;
           lastCell = cell;
         }
 
-        if (streak >= 4) {
-          const winner = cell === CellType.Red ? Player.ONE : Player.TWO;
+        if (countstreak >= 4) {
+          const winner = cell === CellType.Yellow ? Player.ONE : Player.TWO;
           alert(`Player ${winner === Player.ONE ? 'ONE' : 'TWO'} wins!`);
           return winner;
         }
