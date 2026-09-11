@@ -69,37 +69,37 @@ export class App {
         return row;
       }
     }
-
     return null;
   }
 
   private checkWin(grid: CellType[][]): CheckResult {
-    const rows = grid.length;
-    const columns = grid[0]?.length ?? 0;
+    for (let row = 0; row < grid.length; row++) {
+      let streak = 0;
+      let lastCell: CellType | null = null;
 
-    if (rows < 4 || columns < 4) {
-      return 'notDecided';
-    }
-    for (let row = 0; row < rows; row++) {
-      for (let column = 0; column < columns; column++) {
+      for (let column = 0; column < grid[row].length; column++) {
         const cell = grid[row][column];
 
         if (cell === CellType.Empty) {
+          streak = 0;
+          lastCell = null;
           continue;
         }
+        if (cell === lastCell) {
+          streak++;
+        } else {
+          streak = 1;
+          lastCell = cell;
+        }
 
-        const player = cell === CellType.Red ? Player.ONE : Player.TWO;
-
-        if (
-          column <= columns - 4 &&
-          grid[row][column + 1] === cell &&
-          grid[row][column + 2] === cell &&
-          grid[row][column + 3] === cell
-        ) {
-          return player;
+        if (streak >= 4) {
+          const winner = cell === CellType.Red ? Player.ONE : Player.TWO;
+          alert(`Player ${winner === Player.ONE ? 'ONE' : 'TWO'} wins!`);
+          return winner;
         }
       }
     }
+
     return 'notDecided';
   }
 
